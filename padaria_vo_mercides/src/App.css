@@ -1,0 +1,88 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+
+.card {
+  display: flex;
+  padding: 1em;
+  gap: 20px;
+  justify-content: center;
+}
+
+.read-the-docs {
+  color: #888;
+}
+.padrao-list {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.padrao-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-family: 'Arial Black';
+}
+
+.padrao-table th, .padrao-table td {
+  border: 1px solid #ffffff;
+  padding: 30px; /* Ajuste o valor conforme necessário para adicionar espaçamento */
+  text-align: left;
+}
+
+.padrao-table th {
+  background-color: #000000;
+}
+.cadastro-form {
+  max-width: 400px;
+  margin: 0 auto;
+}
+label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 16px;
+}
+
+.button-class{
+  color: #000000;
+  padding: 10px 15px;
+  border: 1px solid #007bff; 
+  cursor: pointer;
+  transition: background-color 0.3s, border-color 0.3s; 
+}
+
+.background-container {
+  background-image: url('public/diferentes-tipos-de-pao-feitos-de-farinha-de-trigo-1-jpg.avif'); 
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: brightness(0.5); 
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: -1;
+}
+
+body {
+  margin: 0;
+}
