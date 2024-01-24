@@ -1,10 +1,11 @@
-import './App.css'
+import React from "react";
+import "./App.css";
+import { CrediarioEnum } from "./modules/common/core/enums/crediario.enum";
 
-const Crediario = () => (
-  <div>
-    <h2>Página de Crediário</h2>
-
-  </div>
-);
-
-export default Crediario;
+export const Crediario: React.FC = () => {
+  return (
+    <div>
+      <h2>{CrediarioEnum.TITLE}</h2>
+    </div>
+  );
+};

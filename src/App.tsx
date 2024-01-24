@@ -1,38 +1,37 @@
-import './App.css'
-import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom';
-import Clientes from '@/clientes.tsx';
-import Crediario from '@/crediario.tsx';
-import Produtos from '@/produtos.tsx';
-import CadastraCliente from '@/cadastra_cliente.tsx';
-import CadastraProduto from '@/cadastra_produto.tsx';
+import "./App.css";
+import { BrowserRouter as Router, Link, Route, Routes } from "react-router-dom";
+import { PadariaEnum, PadariaTabsEnum } from "./modules/common/core/enums/padaria.enum";
+import { Clientes } from "@/clientes.tsx";
+import { Crediario } from "@/crediario.tsx";
+import { Produtos } from "@/produtos.tsx";
+import { CadastraCliente } from "@/cadastra_cliente.tsx";
+import { CadastraProduto } from "@/cadastra_produto.tsx";
 
-function App() {
+export const App: React.FC = () => {
   return (
     <Router>
       <div>
-      
-        <h1>Padaria Vó Mercides</h1>
+        <h1>{PadariaEnum.TITLE}</h1>
         <div className="background-container"></div>
         <div className="card">
           <Link to="/clientes">
-            <button className='button-class'>Clientes</button>
+            <button className="button-class">{PadariaTabsEnum.CLIENTES}</button>
           </Link>
           <Link to="/crediario">
-            <button>Crediário</button>
+            <button>{PadariaTabsEnum.CREDIARIO}</button>
           </Link>
           <Link to="/produtos">
-            <button>Produtos</button>
+            <button>{PadariaTabsEnum.PRODUTOS}</button>
           </Link>
         </div>
         <div className="card">
           <Link to="/cadastra_cliente">
-            <button>Cadastrar Cliente</button>
+            <button>{PadariaTabsEnum.CADASTRAR_CLIENTE}</button>
           </Link>
           <Link to="/cadastra_produto">
-            <button>Cadastrar Produto</button>
+            <button>{PadariaTabsEnum.CADASTRAR_PRODUTO}</button>
           </Link>
         </div>
-
         <Routes>
           <Route path="/clientes" element={<Clientes />} />
           <Route path="/crediario" element={<Crediario />} />
@@ -43,6 +42,4 @@ function App() {
       </div>
     </Router>
   );
-}
-
-export default App;
+};
