@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import './app.css'; 
 import DataTable from './components/Tabela/Tabela';
-import { DataGrid, GridColDef } from '@mui/x-data-grid';
+import { GridColDef } from '@mui/x-data-grid';
 
 interface Cliente {
   id_cliente: number;
@@ -36,26 +36,20 @@ function Clientes() {
   }, []);
 
   const columns: GridColDef[] = [
-    { field: 'id_cliente', headerName: 'ID do Cliente', width: 120 },
-    { field: 'nm_cliente', headerName: 'Nome', width: 200 },
-    { field: 'endereco', headerName: 'Endereço', width: 200 },
-    { field: 'telefone', headerName: 'Telefone', width: 150 },
+    { field: 'id_cliente', headerName: 'ID do Cliente', width: 120, headerAlign: 'center'},
+    { field: 'nm_cliente', headerName: 'Nome', width: 200, headerAlign: 'center'},
+    { field: 'endereco', headerName: 'Endereço', width: 200, headerAlign: 'center' },
+    { field: 'telefone', headerName: 'Telefone', width: 150, headerAlign: 'center'},
+    
   ];
-
-  const getRowId = (row: Cliente["id_cliente"]) => row;
-
   return (
     <div>
-      <h2>Página de Clientes</h2>
-      <DataTable columns={columns} getRowId={getRowId}/>
-      {clientes.map((cliente) => (
-          <tr key={cliente.id_cliente}>
-          <td>{cliente.id_cliente}</td>
-          <td>{cliente.nm_cliente}</td>
-          <td>{cliente.endereco}</td>
-          <td>{cliente.telefone}</td>
-        </tr>
-      ))}
+      <h2>Clientes</h2>
+      {clientes.length > 0 ? (
+        <DataTable columns={columns} rows={clientes}getRowId={(row) => row.id_cliente} />
+      ) : (
+        <p>Carregando dados...</p>
+      )}
     </div>
   );
 }
