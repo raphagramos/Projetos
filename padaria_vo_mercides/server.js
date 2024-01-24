@@ -31,32 +31,58 @@ app.get('/clientes', (req, res) => {
   });
 });
 
+
 app.post('/clientes', (req, res) => {
   try {
-
     const { nome, endereco, telefone } = req.body;
-
-
     if (!nome || !endereco || !telefone) {
       return res.status(400).json({ error: 'Todos os campos são obrigatórios' });
     }
-
-
-    const sql = 'INSERT INTO clientes (nm_cliente, endereco, telefone) VALUES (?, ?, ?)';
-
- 
+    const sql = 'INSERT INTO clientes (nm_cliente, endereco, telefone) VALUES (?, ?, ?)'; 
     pool.query(sql, [nome, endereco, telefone], (err, result) => {
       if (err) {
         console.error('Erro ao inserir dados no banco de dados:', err);
         return res.status(500).json({ error: 'Erro interno do servidor' });
       }
-
-
       console.log('Cliente cadastrado com sucesso. ID do Cliente:', result.insertId);
       return res.json({ success: true, insertedId: result.insertId });
     });
   } catch (error) {
 
+    console.error('Erro no processamento da requisição:', error);
+    return res.status(500).json({ error: 'Erro interno do servidor' });
+  }
+});
+
+app.get('/produtos', (req, res) => {
+  const sql = "SELECT * FROM produtos";
+  pool.query(sql, (err, data) => {
+    if (err) {
+      console.error('Erro na consulta ao banco de dados:', err);
+      return res.status(500).json({ error: 'Erro interno do servidor' });
+    }
+
+    console.log('Resposta do banco de dados:', data);
+    return res.json(data);
+  });
+});
+
+app.post('/produtos', (req, res) => {
+  try {
+    const { nome_produto, preco, descricao } = req.body;
+    if (!nome_produto || !preco || !descricao) {
+      return res.status(400).json({ error: 'Todos os campos são obrigatórios' });
+    }
+    const sql = 'INSERT INTO produtos (nome_produto, preco, descricao) VALUES (?, ?, ?)'; 
+    pool.query(sql, [nome_produto, preco, descricao], (err, result) => {
+      if (err) {
+        console.error('Erro ao inserir dados no banco de dados:', err);
+        return res.status(500).json({ error: 'Erro interno do servidor' });
+      }
+      console.log('Produto Cadastrado com Sucesso!', result.insertId);
+      return res.json({ success: true, insertedId: result.insertId });
+    });
+  } catch (error) {
     console.error('Erro no processamento da requisição:', error);
     return res.status(500).json({ error: 'Erro interno do servidor' });
   }

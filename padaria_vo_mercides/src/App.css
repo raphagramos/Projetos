@@ -67,7 +67,7 @@ input {
   cursor: pointer;
   transition: background-color 0.3s, border-color 0.3s; 
 }
-
+  
 .background-container {
   background-image: url('public/diferentes-tipos-de-pao-feitos-de-farinha-de-trigo-1-jpg.avif'); 
   background-size: cover;
