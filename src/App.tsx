@@ -1,11 +1,11 @@
 import "./App.css";
 import { BrowserRouter as Router, Link, Route, Routes } from "react-router-dom";
 import { PadariaEnum, PadariaTabsEnum } from "./modules/common/core/enums/padaria.enum";
-import { Clientes } from "@/clientes.tsx";
-import { Crediario } from "@/crediario.tsx";
-import { Produtos } from "@/produtos.tsx";
-import { CadastraCliente } from "@/cadastra_cliente.tsx";
-import { CadastraProduto } from "@/cadastra_produto.tsx";
+import { Clientes } from "@/modules/clientes/clientes";
+import { Crediario } from "@/modules/crediario/crediario";
+import { Produtos } from "@/modules/produtos/produtos";
+import { CadastraCliente } from "@/modules/cadastra_cliente/cadastra_cliente";
+import { CadastraProduto } from "@/modules/cadastra_produto/cadastra_produto";
 
 export const App: React.FC = () => {
   return (

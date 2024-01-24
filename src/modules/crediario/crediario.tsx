@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import { CrediarioEnum } from "./modules/common/core/enums/crediario.enum";
+import { CrediarioEnum } from "../common/core/enums/crediario.enum";
 
 export const Crediario: React.FC = () => {
   return (

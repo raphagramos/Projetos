@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import "./app.css";
-import DataTable from "./components/Tabela/Tabela";
+import DataTable from "../common/components/table/tabela";
 import { GridColDef } from "@mui/x-data-grid";
 
 interface Produto {

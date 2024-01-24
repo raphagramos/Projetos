@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import "./app.css";
-import DataTable from "./components/Tabela/Tabela";
+import DataTable from "../common/components/table/tabela";
 import { GridColDef } from "@mui/x-data-grid";
-import { ClientesEnum } from "./modules/common/core/enums/clientes.enum";
+import { ClientesEnum } from "../common/core/enums/clientes.enum";
 
-interface Cliente {
+interface ICliente {
   id_cliente: number;
   nm_cliente: string;
   endereco: string;
@@ -12,7 +12,7 @@ interface Cliente {
 }
 
 export const Clientes: React.FC = () => {
-  const [clientes, setClientes] = useState<Cliente[]>([]);
+  const [clientes, setClientes] = useState<ICliente[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -23,7 +23,7 @@ export const Clientes: React.FC = () => {
         if (response.ok) {
           const data = await response.json();
           console.log("Dados dos clientes:", data);
-          setClientes(data as Cliente[]);
+          setClientes(data as ICliente[]);
         } else {
           console.error("Erro ao buscar dados dos clientes:", response.statusText);
         }
