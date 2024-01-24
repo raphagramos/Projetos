@@ -55,7 +55,7 @@ app.post('/clientes', (req, res) => {
 });
 
 app.get('/produtos', (req, res) => {
-  const sql = "SELECT * FROM produtos";
+  const sql = "SELECT * FROM Produtos_padaria";
   pool.query(sql, (err, data) => {
     if (err) {
       console.error('Erro na consulta ao banco de dados:', err);
