@@ -73,7 +73,7 @@ input {
 }
 
 .background-container {
-  background-image: url("public/diferentes-tipos-de-pao-feitos-de-farinha-de-trigo-1-jpg.avif");
+  background-image: url("assets/images/diferentes-tipos-de-pao-feitos-de-farinha-de-trigo-1-jpg.avif");
   background-size: cover;
   display: flex;
   align-items: center;
