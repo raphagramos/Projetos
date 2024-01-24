@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -33,12 +35,12 @@
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
-  font-family: 'Arial Black';
 }
 
-.padrao-table th, .padrao-table td {
+.padrao-table th,
+.padrao-table td {
   border: 1px solid #ffffff;
-  padding: 30px; /* Ajuste o valor conforme necessário para adicionar espaçamento */
+  padding: 30px;
   text-align: left;
 }
 
@@ -60,21 +62,23 @@ input {
   margin-bottom: 16px;
 }
 
-.button-class{
+.button-class {
   color: #000000;
   padding: 10px 15px;
-  border: 1px solid #007bff; 
+  border: 1px solid #007bff;
   cursor: pointer;
-  transition: background-color 0.3s, border-color 0.3s; 
+  transition:
+    background-color 0.3s,
+    border-color 0.3s;
 }
-  
+
 .background-container {
-  background-image: url('public/diferentes-tipos-de-pao-feitos-de-farinha-de-trigo-1-jpg.avif'); 
+  background-image: url("public/diferentes-tipos-de-pao-feitos-de-farinha-de-trigo-1-jpg.avif");
   background-size: cover;
   display: flex;
   align-items: center;
   justify-content: center;
-  filter: brightness(0.5); 
+  filter: brightness(0.5);
   height: 100vh;
   position: fixed;
   top: 0;
@@ -85,4 +89,5 @@ input {
 
 body {
   margin: 0;
+  font-family: "Roboto", sans-serif;
 }
