@@ -3,8 +3,10 @@ import useClientesData from "./components/Tabela/Busca_Clientes";
 import DataTable from "./components/Tabela/Tabela";
 import { GridColDef } from "@mui/x-data-grid";
 import { ClientesEnum } from "./modules/common/core/enums/clientes.enum";
+import "./components/Tabela/tabela.css";
 
-const Clientes: React.FC = () => {
+
+export const Clientes: React.FC = () => {
   const { clientes } = useClientesData();
 
   const columns: GridColDef[] = [
@@ -15,15 +17,15 @@ const Clientes: React.FC = () => {
   ];
 
   return (
-    <div>
-      <h2>{ClientesEnum.TITLE}</h2>
-      {clientes.length > 0 ? (
-        <DataTable columns={columns} rows={clientes} getRowId={(row) => row.id_cliente} />
-      ) : (
-        <p>{ClientesEnum.LOADING}</p>
-      )}
+    <div className="table-container">
+      <div className="responsive-table">
+        <h2>{ClientesEnum.TITLE}</h2>
+        {clientes.length > 0 ? (
+          <DataTable columns={columns} rows={clientes} getRowId={(row) => row.id_cliente} />
+        ) : (
+          <p>{ClientesEnum.LOADING}</p>
+        )}
+      </div>
     </div>
   );
 };
-
-export default Clientes;

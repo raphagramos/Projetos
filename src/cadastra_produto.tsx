@@ -84,7 +84,7 @@ export const CadastraProduto: React.FC = () => {
           decimalScale={2}
         />
 
-        <label htmlFor="descricao">{CadastraProdutoEnum.TELEFONE}</label>
+        <label htmlFor="descricao">{CadastraProdutoEnum.DESCRICAO}</label>
         <input
           type="text"
           id="descricao"

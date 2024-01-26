@@ -44,13 +44,15 @@ export const Produtos: React.FC = () => {
   ];
 
   return (
-    <div>
+    <div className="table-container">
+      <div className="responsive-table">
       <h2>Produtos</h2>
       {Produtos.length > 0 ? (
         <DataTable columns={columns} rows={Produtos} getRowId={(row) => row.id_produto} />
       ) : (
         <p>Carregando dados...</p>
       )}
+    </div>
     </div>
   );
 };

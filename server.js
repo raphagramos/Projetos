@@ -87,8 +87,38 @@ app.post('/produtos', (req, res) => {
     return res.status(500).json({ error: 'Erro interno do servidor' });
   }
 });
+app.get('/compras', (req, res) => {
+  const sql = "SELECT * FROM compras_cliente";
+  pool.query(sql, (err, data) => {
+    if (err) {
+      console.error('Erro na consulta ao banco de dados:', err);
+      return res.status(500).json({ error: 'Erro interno do servidor' });
+    }
 
-
+    console.log('Resposta do banco de dados:', data);
+    return res.json(data);
+  });
+});
+app.post('/compras', (req, res) => {
+  try {
+    const { id_cliente, mes, valor_compra } = req.body;
+    if (!id_cliente || !mes || !valor_compra) {
+      return res.status(400).json({ error: 'Todos os campos são obrigatórios' });
+    }
+    const sql = 'INSERT INTO compras_cliente (id_cliente, mes, valor_compra) VALUES (?, ?, ?)'; 
+    pool.query(sql, [id_cliente, mes, valor_compra], (err, result) => {
+      if (err) {
+        console.error('Erro ao inserir dados no banco de dados:', err);
+        return res.status(500).json({ error: 'Erro interno do servidor' });
+      }
+      console.log('Marcado com Sucesso na conta!', result.insertId);
+      return res.json({ success: true, insertedId: result.insertId });
+    });
+  } catch (error) {
+    console.error('Erro no processamento da requisição:', error);
+    return res.status(500).json({ error: 'Erro interno do servidor' });
+  }
+});
 const PORT = process.env.PORT || 8081;
 app.listen(PORT, () => {
   console.log("Servidor ouvindo na porta", PORT);

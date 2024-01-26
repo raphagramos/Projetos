@@ -7,6 +7,10 @@
   text-align: center;
 }
 
+.responsive-application{
+  width: 100%;
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -90,4 +94,14 @@ input {
 body {
   margin: 0;
   font-family: "Roboto", sans-serif;
+}
+
+@media (max-width:480px){
+  #root {
+    max-width: 50%;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+  }
+
 }

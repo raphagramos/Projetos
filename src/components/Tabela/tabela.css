@@ -1,0 +1,19 @@
+/* tabela.css */
+.table-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60vh; 
+  }
+  .responsive-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  @media (max-width: 480px) {
+    .responsive-table {
+      width: 50%;
+      border-collapse: collapse;
+    }
+  }
+  
