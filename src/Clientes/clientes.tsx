@@ -1,13 +1,13 @@
 import React from "react";
-import useClientesData from "./components/Tabela/Busca_Clientes";
-import DataTable from "./components/Tabela/Tabela";
+import useClientesData from "./Busca_Clientes";
+import DataTable from "../components/Tabela/Tabela";
 import { GridColDef } from "@mui/x-data-grid";
-import { ClientesEnum } from "./modules/common/core/enums/clientes.enum";
+import { ClientesEnum } from "../modules/common/core/enums/clientes.enum";
 
-const Clientes: React.FC = () => {
+export const Clientes: React.FC = () => {
   const { clientes } = useClientesData();
 
-  const columns: GridColDef[] = [
+const columns: GridColDef[] = [
     { field: "id_cliente", headerName: "ID do Cliente", width: 120, headerAlign: "center" },
     { field: "nm_cliente", headerName: "Nome", width: 200, headerAlign: "center" },
     { field: "endereco", headerName: "Endereço", width: 200, headerAlign: "center" },

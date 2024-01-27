@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import "./App.css";
+import "../App.css";
 import Swal from "sweetalert2";
 import { NumericFormat } from "react-number-format";
-import { CadastraProdutoEnum } from "./modules/common/core/enums/cadastra_produto.enum";
+import { CadastraProdutoEnum } from "../modules/common/core/enums/cadastra_produto.enum";
 
 export const CadastraProduto: React.FC = () => {
   const [formData, setFormData] = useState({

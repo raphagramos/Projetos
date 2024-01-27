@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { columns } from "../../clientes";
+import { columns } from "./clientes";
 const useClientesData = () => {
   const [clientes, setClientes] = useState<columns[]>([]);
 

@@ -63,13 +63,19 @@ input {
 }
 
 .button-class {
-  color: #000000;
-  padding: 10px 15px;
-  border: 1px solid #007bff;
-  cursor: pointer;
-  transition:
-    background-color 0.3s,
-    border-color 0.3s;
+  margin-top: 50px !important;
+  width: 50%;
+  border-radius: 8px !important;
+  border: 1px solid transparent !important;
+  padding: 0.6em 1.2em !important;
+  font-size: 1em !important;
+  font-weight: 500 !important;
+  font-family: inherit !important;
+  background-color: #ffffff !important;
+  cursor: pointer !important;
+  transition: border-color 0.25s !important;
+  color: rgb(0, 0, 0) !important;
+  text-transform: none !important;
 }
 
 .background-container {
@@ -90,4 +96,14 @@ input {
 body {
   margin: 0;
   font-family: "Roboto", sans-serif;
+}
+
+@media (max-width: 1000px){
+
+  #root {
+    width: 50%;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+  }
 }

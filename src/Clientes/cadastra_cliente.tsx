@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import InputMask from "react-input-mask";
-import "./App.css";
+import "../App.css";
 import Swal from "sweetalert2";
-import { CadastraClienteEnum } from "./modules/common/core/enums/cadastra_cliente.enum";
+import { CadastraClienteEnum } from "../modules/common/core/enums/cadastra_cliente.enum";
 
 export const CadastraCliente: React.FC = () => {
   const [formData, setFormData] = useState({
