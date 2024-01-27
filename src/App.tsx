@@ -1,11 +1,11 @@
 import "./App.css";
 import { BrowserRouter as Router, Link, Route, Routes } from "react-router-dom";
 import { PadariaEnum, PadariaTabsEnum } from "./modules/common/core/enums/padaria.enum";
-import { Clientes } from "@/clientes.tsx";
-import { Crediario } from "@/crediario.tsx";
-import { Produtos } from "@/produtos.tsx";
-import { CadastraCliente } from "@/cadastra_cliente.tsx";
-import { CadastraProduto } from "@/cadastra_produto.tsx";
+import { Clientes } from "@/Clientes/clientes";
+import { Crediario } from "@/Crediario/crediario";
+import { Produtos } from "@/Produtos/produtos";
+import { CadastraCliente } from "@/Clientes/cadastra_cliente";
+import { CadastraProduto } from "@/Produtos/cadastra_produto";
 
 export const App: React.FC = () => {
   return (
@@ -15,7 +15,7 @@ export const App: React.FC = () => {
         <div className="background-container"></div>
         <div className="card">
           <Link to="/clientes">
-            <button className="button-class">{PadariaTabsEnum.CLIENTES}</button>
+            <button>{PadariaTabsEnum.CLIENTES}</button>
           </Link>
           <Link to="/crediario">
             <button>{PadariaTabsEnum.CREDIARIO}</button>
