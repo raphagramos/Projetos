@@ -8,6 +8,7 @@ import useProductsData from "../Produtos/buscaProdutos";
 import Select from 'react-select';
 import { customSelectStyles } from '../components/SelectStyle/selectStyle';
 
+
 const style = {
     position: 'absolute' as 'absolute',
     top: '50%',
@@ -97,6 +98,7 @@ export default function BasicModal(props: BasicModalProps) {
                         style={{
                             textAlign: 'center',
                             fontSize: '35px'
+
                         }}
                         id="modal-modal-title" variant="h6" component="h2">
                         Anotar
