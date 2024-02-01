@@ -3,11 +3,10 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import Checkbox from '@mui/material/Checkbox';
-import Dropdown, { Option } from 'react-dropdown';
-import 'react-dropdown/style.css';
 import useClientesData from "../Clientes/Busca_Clientes";
 import useProductsData from "../Produtos/buscaProdutos";
+import Select from 'react-select';
+import { customSelectStyles } from '../components/SelectStyle/selectStyle';
 
 const style = {
     position: 'absolute' as 'absolute',
@@ -25,52 +24,63 @@ interface Product {
     nome_produto: string;
     preco: number;
 }
+interface Cliente {
+    nm_cliente: string;
+}
+interface BasicModalProps {
+    open: boolean;
+    handleClose: () => void;
+}
 
-export default function BasicModal() {
+export default function BasicModal(props: BasicModalProps) {
     const [open, setOpen] = React.useState(false);
-    const [selectedClient, setSelectedClient] = useState(null);
+    const [selectedClient, setSelectedClient] = useState<Cliente | null>(null);
     const [selectedProducts, setSelectedProducts] = useState<Record<number, number>>({}); // Armazena a quantidade de cada produto
     const { clientes } = useClientesData();
     const { produtos } = useProductsData();
-
+    const [totalPrice, setTotalPrice] = useState<number>(0);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+    const handleSum = () => setOpen(false);
 
-    const handleClientSelection = (client) => {
+    const handleClientSelection = (client: Cliente) => {
         setSelectedClient(client);
     };
-
+    
     const handleProductSelection = (product: Product) => {
         const isSelected = selectedProducts[product.id_produto] !== undefined;
-
+    
         setSelectedProducts((prevSelected) => {
             if (isSelected) {
                 const { [product.id_produto]: _, ...rest } = prevSelected;
+                recalculateTotalPrice(rest); 
                 return rest;
             } else {
-                return { ...prevSelected, [product.id_produto]: 1 }; // Inicializa a quantidade como 1
+                const newSelected = { ...prevSelected, [product.id_produto]: 1 };
+                recalculateTotalPrice(newSelected); 
+                return newSelected;
             }
         });
     };
-
-    const handleQuantityChange = (productId, event) => {
-        const quantity = parseInt(event.target.value, 10);
-
-        setSelectedProducts((prevSelected) => {
-            if (quantity > 0) {
-                return { ...prevSelected, [productId]: quantity };
-            } else {
-                const { [productId]: _, ...rest } = prevSelected;
-                return rest;
+    const recalculateTotalPrice = (updatedSelected: Record<number, number>) => {
+        const newTotalPrice = Object.keys(updatedSelected).reduce((total, productId) => {
+            const product = produtos.find((p) => p.id_produto === parseInt(productId, 10));
+            if (product) {
+                total += product.preco * updatedSelected[product.id_produto];
             }
-        });
+            return total;
+        }, 0);
+    
+        setTotalPrice(newTotalPrice);
     };
-
     const dropdownOptions = clientes.map((cliente) => ({
-        value: cliente,
+        value: cliente.nm_cliente,
         label: cliente.nm_cliente,
     }));
-
+    const optionsWithPrice = produtos.map((product) => ({
+        value: product,
+        label: `${product.nome_produto} - R$${product.preco.toFixed(2)}`,
+    }));
     return (
         <div>
             <Button className='button-class' onClick={handleOpen}>
@@ -86,48 +96,69 @@ export default function BasicModal() {
                     <Typography
                         style={{
                             textAlign: 'center',
-                            fontSize:'35px'
+                            fontSize: '35px'
                         }}
                         id="modal-modal-title" variant="h6" component="h2">
                         Anotar
                     </Typography>
                     <div>
-                        <h3>Clientes</h3>
-                        <Dropdown
+                        <h3 style={{ textAlign: "center" }}>Clientes</h3>
+                        <Select
                             options={dropdownOptions}
-                            onChange={(selectedOption: Option) => handleClientSelection(selectedOption.value)}
-                            value={selectedClient ? selectedClient.nm_cliente : 'Selecione um cliente'}
+                            onChange={(selectedOption: any) => {
+                                const selectedClient = clientes.find(cliente => cliente.nm_cliente === selectedOption.value);
+                                if (selectedClient) {
+                                    handleClientSelection(selectedClient);
+                                }
+                            }}
+                            value={selectedClient ? { value: selectedClient.nm_cliente, label: selectedClient.nm_cliente } : null}
                             placeholder="Selecione um cliente"
+                            styles={customSelectStyles}
                         />
                     </div>
+
                     <div>
-                        <h3>Produtos</h3>
-                        {produtos.map((product) => (
-                            <div key={product.id_produto} style={{ display: 'flex', alignItems: 'center', marginBottom: '8px' }}>
-                                <Checkbox
-                                    checked={selectedProducts[product.id_produto] !== undefined}
-                                    onChange={() => handleProductSelection(product)}
-                                />
-                                <label style={{ marginRight: '8px' }}>{product.nome_produto}</label>
-                                {selectedProducts[product.id_produto] !== undefined && (
-                                    <>
-                                        <input
-                                            type="number"
-                                            min="1"
-                                            value={selectedProducts[product.id_produto]}
-                                            onChange={(event) => handleQuantityChange(product.id_produto, event)}
-                                            style={{ marginRight: '8px' }}
-                                        />
-                                        <span>Preço: R$ {product.preco * selectedProducts[product.id_produto]}</span>
-                                    </>
-                                )}
-                            </div>
-                        ))}
+                        <h3 style={{ textAlign: "center" }}>Produtos</h3>
+
+                        <Select
+                            isMulti={true}
+                            options={optionsWithPrice}
+                            onChange={(selectedOptions: any) => {
+                                setSelectedProducts(
+                                    selectedOptions.reduce((acc: Record<number, number>, option: any) => {
+                                        acc[option.value.id_produto] = 1;
+                                        return acc;
+                                    }, {})
+                                );
+                            }}
+                            value={produtos.filter((product) => selectedProducts[product.id_produto]).map((product) => ({
+                                value: product,
+                                label: product.nome_produto,
+
+                            }))}
+                            styles={customSelectStyles}
+                            placeholder="Selecione um produto"
+                        />
+
                     </div>
-                    <Button className='button-class' onClick={handleClose}>
-                        Fechar Modal
+                    <Button
+                        style={{
+                            top: '-310px',
+                            left: '360px',
+                        }}
+                        onClick={handleClose}
+                    >
+                        <img
+                            src="src/assets/images/closeIcon.png"
+                            alt="Fechar"
+                            style={{ width: '20px', height: '20px' }}
+                        />
                     </Button>
-                </Box>
+                    <Button className='button-modal' style={{ marginLeft: '60px' }} onClick={handleSum}>
+                        Anotar
+                    </Button>
+                    <p>Total: R${totalPrice.toFixed(2)}</p>
+                </Box>               
             </Modal>
         </div>
     );
