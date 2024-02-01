@@ -76,6 +76,22 @@ input {
   transition: border-color 0.25s !important;
   color: rgb(0, 0, 0) !important;
   text-transform: none !important;
+
+}
+.button-modal {
+  margin-top: 50px !important;
+  width: 40%;
+  border-radius: 8px !important;
+  border: 1px solid transparent !important;
+  padding: 0.6em 1.2em !important;
+  font-size: 1em !important;
+  font-weight: 500 !important;
+  font-family: inherit !important;
+  background-color: #ffffff !important;
+  cursor: pointer !important;
+  transition: border-color 0.25s !important;
+  color: rgb(0, 0, 0) !important;
+  text-transform: none !important;
 }
 
 .background-container {
@@ -106,3 +122,19 @@ body {
     text-align: center;
   }
 }
+
+.select-label {
+
+  background-color: #1a1a1a;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  color: white;
+  & .Select-menu-outer {
+      background-color: #1a1a1a;
+  }
+  & .Select-value {
+      color: white;
+  }
+}
+
+
